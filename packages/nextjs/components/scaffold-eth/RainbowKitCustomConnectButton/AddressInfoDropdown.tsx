@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { NetworkOptions } from "./NetworkOptions";
-import CopyToClipboard from "react-copy-to-clipboard";
+// Import as namespace
+import * as CopyToClipboardModule from "react-copy-to-clipboard";
 import { getAddress } from "viem";
 import { Address, useDisconnect } from "wagmi";
 import {
@@ -15,6 +16,10 @@ import {
 import { BlockieAvatar, isENS } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
 import { getTargetNetworks } from "~~/utils/scaffold-eth";
+
+// Extract the component class from the namespace to resolve "no construct or call signatures"
+const CopyToClipboard =
+  (CopyToClipboardModule as any).default || CopyToClipboardModule.CopyToClipboard || CopyToClipboardModule;
 
 const allowedNetworks = getTargetNetworks();
 

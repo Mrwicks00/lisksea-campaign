@@ -1,8 +1,13 @@
 import { useState } from "react";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+// Import as namespace
+import * as CopyToClipboardModule from "react-copy-to-clipboard";
 import { TransactionReceipt } from "viem";
 import { CheckCircleIcon, DocumentDuplicateIcon } from "@heroicons/react/24/outline";
 import { displayTxResult } from "~~/app/debug/_components/contract";
+
+// Extract the component class from the namespace to resolve "no construct or call signatures"
+const CopyToClipboard =
+  (CopyToClipboardModule as any).default || CopyToClipboardModule.CopyToClipboard || CopyToClipboardModule;
 
 export const TxReceipt = (
   txResult: string | number | bigint | Record<string, any> | TransactionReceipt | undefined,

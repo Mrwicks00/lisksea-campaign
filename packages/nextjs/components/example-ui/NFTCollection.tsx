@@ -28,17 +28,17 @@ export const NFTCollection = () => {
   const { data: userBalance } = useScaffoldContractRead({
     contractName: "MyNFT",
     functionName: "balanceOf",
-    args: [connectedAddress],
+    args: [(connectedAddress as `0x${string}`) || undefined],
   });
 
   const { writeAsync: writeMyNFTAsync } = useScaffoldContractWrite({
     contractName: "MyNFT",
     functionName: "mint",
-    args: [mintToAddress || connectedAddress],
+    args: [((mintToAddress || connectedAddress) as `0x${string}`) || "0x"],
   });
 
   const handleMint = async () => {
-    const targetAddress = mintToAddress || connectedAddress;
+    const targetAddress = (mintToAddress || connectedAddress) as `0x${string}`;
 
     if (!targetAddress) {
       notification.error("Please connect wallet or specify address");

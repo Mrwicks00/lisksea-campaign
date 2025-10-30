@@ -2,8 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+// We import the entire namespace as CopyToClipboard
+import * as CopyToClipboardModule from "react-copy-to-clipboard";
 import { CheckCircleIcon, DocumentDuplicateIcon } from "@heroicons/react/24/outline";
+
+const CopyToClipboard =
+  (CopyToClipboardModule as any).default || CopyToClipboardModule.CopyToClipboard || CopyToClipboardModule;
 
 export const TransactionHash = ({ hash }: { hash: string }) => {
   const [addressCopied, setAddressCopied] = useState(false);
